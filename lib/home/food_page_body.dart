@@ -50,9 +50,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
 
   Widget _buildPageItem(int index) {
     Matrix4 matrix = new Matrix4.identity();
-    if(index == _currentPageValue.floor()){
-      var currScale = 1-(_currentPageValue-index)*
-    }
+    if (index == _currentPageValue.floor()) {}
     return Stack(
       children: [
         Container(
