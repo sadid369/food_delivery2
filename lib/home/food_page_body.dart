@@ -101,7 +101,25 @@ class _FoodPageBodyState extends State<FoodPageBody> {
               height: 120,
               margin: EdgeInsets.only(left: 30, right: 30, bottom: 30),
               decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(30), color: Colors.white),
+                borderRadius: BorderRadius.circular(30),
+                color: Colors.white,
+                // ignore: prefer_const_literals_to_create_immutables
+                boxShadow: [
+                  BoxShadow(
+                    color: Color(0xFFe8e8e8),
+                    blurRadius: 5.0,
+                    offset: Offset(0, 5),
+                  ),
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(-5, 0),
+                  ),
+                  BoxShadow(
+                    color: Colors.white,
+                    offset: Offset(5, 0),
+                  ),
+                ],
+              ),
               child: Container(
                 padding: EdgeInsets.only(
                   top: 10,
