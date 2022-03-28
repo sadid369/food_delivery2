@@ -5,6 +5,7 @@ import 'package:food_delivery2/home/food_page_body.dart';
 import 'package:food_delivery2/utils/colors.dart';
 import 'package:food_delivery2/widgets/big_text.dart';
 import 'package:food_delivery2/widgets/small_text.dart';
+import 'dart:developer';
 
 class MainFoodPage extends StatefulWidget {
   MainFoodPage({Key? key}) : super(key: key);
@@ -16,9 +17,12 @@ class MainFoodPage extends StatefulWidget {
 class _MainFoodPageState extends State<MainFoodPage> {
   @override
   Widget build(BuildContext context) {
+    var height = MediaQuery.of(context).size.height;
+    log("device height $height");
     return Scaffold(
       body: Column(
         children: [
+          // showing the header
           Container(
             width: double.infinity,
             child: Container(
@@ -61,6 +65,7 @@ class _MainFoodPageState extends State<MainFoodPage> {
               ),
             ),
           ),
+          //showing the body
           FoodPageBody(),
         ],
       ),
