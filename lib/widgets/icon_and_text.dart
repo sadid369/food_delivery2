@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery2/utils/dimensions.dart';
 import 'package:food_delivery2/widgets/small_text.dart';
 
 class IconAndTextWidget extends StatelessWidget {
@@ -22,6 +23,7 @@ class IconAndTextWidget extends StatelessWidget {
         Icon(
           icon,
           color: iconColor,
+          size: Dimensions.iconeSize24,
         ),
         SizedBox(
           width: 5,
