@@ -1,7 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, avoid_unnecessary_containers, prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:food_delivery2/home/food_page_body.dart';
+import 'package:food_delivery2/pages/home/food_page_body.dart';
+
 import 'package:food_delivery2/utils/colors.dart';
 import 'package:food_delivery2/utils/dimensions.dart';
 import 'package:food_delivery2/widgets/big_text.dart';

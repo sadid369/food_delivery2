@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 
 import 'package:food_delivery2/utils/colors.dart';
 import 'package:food_delivery2/utils/dimensions.dart';
+import 'package:food_delivery2/widgets/app_column.dart';
 import 'package:food_delivery2/widgets/big_text.dart';
 import 'package:food_delivery2/widgets/icon_and_text.dart';
 import 'package:food_delivery2/widgets/small_text.dart';
@@ -102,65 +103,96 @@ class _FoodPageBodyState extends State<FoodPageBody> {
           ),
         ),
         // List of food and images
-        Container(
-          height: 700,
-          child: ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              itemCount: 10,
-              itemBuilder: (context, index) {
-                return Container(
-                  margin: EdgeInsets.only(
-                      left: Dimensions.width20,
-                      right: Dimensions.width20,
-                      bottom: Dimensions.height10),
-                  child: Row(
-                    children: [
-                      // image Section
-                      Container(
-                        width: 120,
-                        height: 120,
+
+        ListView.builder(
+            physics: NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+            itemCount: 10,
+            itemBuilder: (context, index) {
+              return Container(
+                margin: EdgeInsets.only(
+                    left: Dimensions.width20,
+                    right: Dimensions.width20,
+                    bottom: Dimensions.height10),
+                child: Row(
+                  children: [
+                    // image Section
+                    Container(
+                      width: Dimensions.listViewImgSize,
+                      height: Dimensions.listViewImgSize,
+                      decoration: BoxDecoration(
+                          borderRadius:
+                              BorderRadius.circular(Dimensions.radius20),
+                          color: Colors.white38,
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage("assets/image/food0.png"))),
+                    ),
+                    // text Container
+                    Expanded(
+                      child: Container(
+                        height: Dimensions.listViewTextContSize,
+                        width: double.infinity,
                         decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.circular(Dimensions.radius20),
-                            color: Colors.white38,
-                            image: DecorationImage(
-                                fit: BoxFit.cover,
-                                image: AssetImage("assets/image/food0.png"))),
-                      ),
-                      // text Container
-                      Expanded(
-                        child: Container(
-                          height: 100,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(
-                                  Dimensions.radius20,
-                                ),
-                                bottomRight: Radius.circular(
-                                  Dimensions.radius20,
-                                ),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(
+                              Dimensions.radius20,
+                            ),
+                            bottomRight: Radius.circular(
+                              Dimensions.radius20,
+                            ),
+                          ),
+                          // color: Colors.red
+                        ),
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                            left: Dimensions.width10,
+                          ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              BigText(
+                                text:
+                                    "Nutritious fruit meal in china...........",
                               ),
-                              color: Colors.red),
-                          child: Padding(
-                            padding: EdgeInsets.only(
-                              left: Dimensions.width10,
-                            ),
-                            child: Column(
-                              children: [
-                                BigText(
-                                  text: "Nutritious fruit meal in china",
-                                ),
-                              ],
-                            ),
+                              SizedBox(
+                                height: Dimensions.height10,
+                              ),
+                              SmallText(text: "With chiese characrteristic"),
+                              SizedBox(
+                                height: Dimensions.height10,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconAndTextWidget(
+                                    icon: Icons.circle_sharp,
+                                    text: "Normal",
+                                    iconColor: AppColors.iconColor1,
+                                  ),
+                                  IconAndTextWidget(
+                                    icon: Icons.location_on,
+                                    text: "1.7km",
+                                    iconColor: AppColors.mainColor,
+                                  ),
+                                  IconAndTextWidget(
+                                    icon: Icons.access_time_rounded,
+                                    text: "32min",
+                                    iconColor: AppColors.iconColor2,
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
-                    ],
-                  ),
-                );
-              }),
-        ),
+                    ),
+                  ],
+                ),
+              );
+            }),
       ],
     );
   }
@@ -247,64 +279,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   left: 5,
                   right: 5,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    BigText(text: "Chinese Side"),
-                    SizedBox(
-                      height: Dimensions.height10,
-                    ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Wrap(
-                          children: List.generate(
-                            5,
-                            (index) => Icon(
-                              Icons.star,
-                              color: AppColors.mainColor,
-                              size: 15,
-                            ),
-                          ),
-                        ),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        SmallText(text: "4.5"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        SmallText(text: "1287"),
-                        SizedBox(
-                          width: 10,
-                        ),
-                        SmallText(text: "comments")
-                      ],
-                    ),
-                    SizedBox(
-                      height: Dimensions.height20,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconAndTextWidget(
-                          icon: Icons.circle_sharp,
-                          text: "Normal",
-                          iconColor: AppColors.iconColor1,
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.location_on,
-                          text: "1.7km",
-                          iconColor: AppColors.mainColor,
-                        ),
-                        IconAndTextWidget(
-                          icon: Icons.access_time_rounded,
-                          text: "32min",
-                          iconColor: AppColors.iconColor2,
-                        ),
-                      ],
-                    )
-                  ],
+                child: AppColumn(
+                  text: "Chinese side",
                 ),
               ),
             ),
