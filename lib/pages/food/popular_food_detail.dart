@@ -1,6 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery2/controllers/popular_product_controller.dart';
+import 'package:food_delivery2/models/products_model.dart';
+import 'package:food_delivery2/utils/app_constants.dart';
+import 'package:get/get.dart';
+
+import 'package:food_delivery2/pages/home/main_food_page.dart';
 import 'package:food_delivery2/utils/colors.dart';
 import 'package:food_delivery2/utils/dimensions.dart';
 import 'package:food_delivery2/widgets/app_column.dart';
@@ -11,10 +17,18 @@ import 'package:food_delivery2/widgets/icon_and_text.dart';
 import 'package:food_delivery2/widgets/small_text.dart';
 
 class PopularFoodDetail extends StatelessWidget {
-  const PopularFoodDetail({Key? key}) : super(key: key);
+  int pageId;
+  PopularFoodDetail({
+    Key? key,
+    required this.pageId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    ProductModel product =
+        Get.find<PopularProductController>().popularProductList[pageId];
+    print(product.name);
+    print(pageId);
     return Scaffold(
       backgroundColor: Colors.white,
       body: Stack(children: [
@@ -28,7 +42,9 @@ class PopularFoodDetail extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/image/food0.png'),
+                image: NetworkImage(AppConstants.BASE_URL +
+                    AppConstants.UPLOAD_URL +
+                    product.img!),
               ),
             ),
           ),
@@ -41,8 +57,13 @@ class PopularFoodDetail extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              AppIcon(
-                icon: Icons.arrow_back_ios,
+              GestureDetector(
+                onTap: (() {
+                  Get.to(() => MainFoodPage());
+                }),
+                child: AppIcon(
+                  icon: Icons.arrow_back_ios,
+                ),
               ),
               AppIcon(
                 icon: Icons.shopping_cart_outlined,
@@ -78,7 +99,7 @@ class PopularFoodDetail extends StatelessWidget {
               // ignore: prefer_const_literals_to_create_immutables
               children: [
                 AppColumn(
-                  text: "Chinese Side",
+                  text: product.name!,
                 ),
                 SizedBox(
                   height: Dimensions.height20,
@@ -91,17 +112,7 @@ class PopularFoodDetail extends StatelessWidget {
                 ),
                 Expanded(
                   child: SingleChildScrollView(
-                    child: ExpandableTextWidget(
-                        text:
-                            '''If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!'''),
+                    child: ExpandableTextWidget(text: product.description!),
                   ),
                 )
               ],
@@ -170,7 +181,7 @@ class PopularFoodDetail extends StatelessWidget {
                 right: Dimensions.width20,
               ),
               child: BigText(
-                text: "\$10 | Add to cart",
+                text: "\$${product.price!} | Add to cart",
                 color: Colors.white,
               ),
               decoration: BoxDecoration(
