@@ -1,17 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery2/controllers/recommended_product_controller.dart';
+import 'package:food_delivery2/utils/app_constants.dart';
+import 'package:get/get.dart';
+
 import 'package:food_delivery2/routes/route_helper.dart';
 import 'package:food_delivery2/utils/colors.dart';
 import 'package:food_delivery2/utils/dimensions.dart';
 import 'package:food_delivery2/widgets/app_icon.dart';
 import 'package:food_delivery2/widgets/big_text.dart';
 import 'package:food_delivery2/widgets/expandale_text_widget.dart';
-import 'package:get/get.dart';
 
 class RecommendedFoodDetail extends StatelessWidget {
-  const RecommendedFoodDetail({Key? key}) : super(key: key);
+  final int pageId;
+  const RecommendedFoodDetail({
+    Key? key,
+    required this.pageId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<RecommendedProductController>().recommendedProductList[pageId];
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -39,7 +48,7 @@ class RecommendedFoodDetail extends StatelessWidget {
               child: Container(
                 child: Center(
                     child: BigText(
-                  text: "Chinese Side",
+                  text: product.name!,
                   size: Dimensions.font26,
                 )),
                 width: double.maxFinite,
@@ -64,8 +73,8 @@ class RecommendedFoodDetail extends StatelessWidget {
             pinned: true,
             backgroundColor: AppColors.yellowColor,
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                "assets/image/food0.png",
+              background: Image.network(
+                AppConstants.BASE_URL + AppConstants.UPLOAD_URL + product.img!,
                 fit: BoxFit.cover,
                 width: double.maxFinite,
               ),
@@ -76,24 +85,8 @@ class RecommendedFoodDetail extends StatelessWidget {
             children: [
               Container(
                 child: ExpandableTextWidget(
-                    text:
-                        '''If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!If you’re planning an Asian-themed dinner, these incredible Chinese side dishes will make it a feast to remember.
-                  
-                  From flavorful veggies to filling rice and noodle dishes, these recipes are sure to complement any main course!'''),
+                  text: product.description!,
+                ),
                 margin: EdgeInsets.only(
                   left: Dimensions.width20,
                   right: Dimensions.width20,
@@ -123,7 +116,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                   iconSize: Dimensions.iconeSize24,
                 ),
                 BigText(
-                  text: "\$12.88" + " X " + " 0 ",
+                  text: "\$${product.price}" + " X " + " 0 ",
                   color: AppColors.mainBlackColor,
                   size: Dimensions.font26,
                 ),
@@ -181,7 +174,7 @@ class RecommendedFoodDetail extends StatelessWidget {
                     right: Dimensions.width20,
                   ),
                   child: BigText(
-                    text: "\$10 | Add to cart",
+                    text: "\$${product.price!}| Add to cart",
                     color: Colors.white,
                   ),
                   decoration: BoxDecoration(
