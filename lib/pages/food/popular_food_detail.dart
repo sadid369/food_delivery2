@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:food_delivery2/controllers/cart_controller.dart';
 import 'package:food_delivery2/controllers/popular_product_controller.dart';
 import 'package:food_delivery2/models/products_model.dart';
 import 'package:food_delivery2/utils/app_constants.dart';
@@ -27,8 +28,8 @@ class PopularFoodDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     ProductModel product =
         Get.find<PopularProductController>().popularProductList[pageId];
-    print(product.name);
-    print(pageId);
+    Get.find<PopularProductController>()
+        .initProduct(Get.find<CartController>());
     return Scaffold(
         backgroundColor: Colors.white,
         body: Stack(children: [
@@ -185,22 +186,27 @@ class PopularFoodDetail extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Container(
-                    padding: EdgeInsets.only(
-                      top: Dimensions.height20,
-                      bottom: Dimensions.height20,
-                      left: Dimensions.width20,
-                      right: Dimensions.width20,
-                    ),
-                    child: BigText(
-                      text: "\$${product.price!} | Add to cart",
-                      color: Colors.white,
-                    ),
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        Dimensions.radius20,
+                  GestureDetector(
+                    onTap: () {
+                      popularProduct.addItem(product);
+                    },
+                    child: Container(
+                      padding: EdgeInsets.only(
+                        top: Dimensions.height20,
+                        bottom: Dimensions.height20,
+                        left: Dimensions.width20,
+                        right: Dimensions.width20,
                       ),
-                      color: AppColors.mainColor,
+                      child: BigText(
+                        text: "\$${product.price!} | Add to cart",
+                        color: Colors.white,
+                      ),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          Dimensions.radius20,
+                        ),
+                        color: AppColors.mainColor,
+                      ),
                     ),
                   ),
                 ],
